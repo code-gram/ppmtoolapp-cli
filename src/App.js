@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React from "react";
+import HeaderComponent from "./components/layout/HeaderComponent";
+import Dashboard from "./components/Dashboard";
+import "bootstrap/dist/css/bootstrap.min.css";
+
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import AddProjectComponent from "./components/projects/AddProjectComponent";
+
+import { Provider } from "react-redux";
+import store from "./store";
+import UpdateProject from "./components/projects/UpdateProject";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Router>
+        <React.Fragment>
+          <HeaderComponent />
+          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/addProject" component={AddProjectComponent} />
+          <Route path="/updateProject/:id" component={UpdateProject} />
+        </React.Fragment>
+      </Router>
+    </Provider>
   );
 }
 
